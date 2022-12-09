@@ -6,6 +6,7 @@ const morgan = require("morgan")
 const methodOverride = require("method-override")
 const mongoose = require("mongoose")
 const Habit = require("./models/habit")
+const HabitRouter = require("./controllers/habit")
 
 // EXPRESS APP
 const app = express()
@@ -19,6 +20,7 @@ app.use((req, res, next) => { // trying to make the habit model available in all
 	req.models = { Habit }
 	next()
 })
+app.use('/habits', HabitRouter)
 
 // ROUTES
 app.get("/", (req, res) => {

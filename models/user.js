@@ -11,7 +11,7 @@ const {Schema, model} = mongoose
 
 const userSchema = new Schema({
     user: {type: String, required: true, unique: true}, 
-    password: {type: String, required: true}
+    password: {type: String, required: true},
     habit: String,
     // createdDate: Date // TODO: date stuff comes later
 })

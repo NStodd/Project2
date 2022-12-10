@@ -60,11 +60,11 @@ router.post('/', (req, res) => {
 
 // Update
 router.put('/:id', (req, res) => {
+    // to be used for calculations and updates
     const newLast = new Date(Date.now())
-    let updated = {}
 
     Habit.findById(req.params.id, (err, foundHabit) => {
-        // 1. increment the Habit's count, foundHabit.count (Int)
+        // always increment total Habit count
         foundHabit.count += 1
     
         // first see if the full strings are equal (i.e. the user has already performed the habit today)
@@ -76,19 +76,22 @@ router.put('/:id', (req, res) => {
             console.log("congratulations, you've continued your streak")
             foundHabit.streakLength += 1
         }
-        else {
+        else { // streak breaks, but that's ok!
             console.log("way to get back on the horse")
             foundHabit.streakLength = 1
         }
 
+        // update the last Date object parameter to be the most recent occurrence
         foundHabit.last = newLast
 
+        // update the database with the updated Habit object
         Habit.findByIdAndUpdate(req.params.id, foundHabit, {new: true}, (err, updatedHabit) => {
             console.log(updatedHabit)
             res.redirect('/')
         })
     })
 })
+
 // Delete
 // Show
 

@@ -18,8 +18,7 @@ const habitSchema = new Schema({
         type: Date,
         default: Date.now()
     }, 
-    last: Date // TODO: add the date value last.
-
+    last: Date 
 }, {
     timestamp: true
     }

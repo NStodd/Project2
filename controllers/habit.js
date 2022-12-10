@@ -58,12 +58,39 @@ router.post('/', (req, res) => {
      */
 })
 
-// Edit
 // Update
+router.put('/:id', (req, res) => {
+    const newLast = new Date(Date.now())
+    let updated = {}
+
+    Habit.findById(req.params.id, (err, foundHabit) => {
+        // 1. increment the Habit's count, foundHabit.count (Int)
+        foundHabit.count += 1
+    
+        // first see if the full strings are equal (i.e. the user has already performed the habit today)
+        if (newLast.toDateString() === foundHabit.last.toDateString()) {
+            console.log("Great job! You've already done it today, keep it up!") //might be more than the 2nd time.
+        }
+        // this is the streak continuing condition (calculates the difference between the ms values)
+        else if (newLast.getTime() - foundHabit.last.getTime() < 129600000) {
+            console.log("congratulations, you've continued your streak")
+            foundHabit.streakLength += 1
+        }
+        else {
+            console.log("way to get back on the horse")
+            foundHabit.streakLength = 1
+        }
+
+        foundHabit.last = newLast
+
+        Habit.findByIdAndUpdate(req.params.id, foundHabit, {new: true}, (err, updatedHabit) => {
+            console.log(updatedHabit)
+            res.redirect('/')
+        })
+    })
+})
 // Delete
 // Show
-
-
 
 /**
  * Export Router

@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<%- include ('../partials/head.ejs')  %>
+
 <body>
-    <h1>BLah blah blah</h1>
+    <%- include ('../partials/header.ejs') %>
+    <main>
+        <div class="habits">
+            <% for (habit of habits) { %>
+                <div class="habit">
+                    <%= habit.name %>
+                    <% if (habit.streak) { %>
+                        <h1>Streak!</h1>
+                    <% } else { %>  
+                        <h1>No Streak</h1>
+                    <% } %> 
+                    <form action="/habits/<%= habit._id %>?_method=PUT" method="post">
+                        <input type="submit" value="I DID IT!">
+                    </form>
+                </div>
+            <% } %>  
+        </div>
+
+    </main>
 </body>
 </html>

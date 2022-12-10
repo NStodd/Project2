@@ -17,6 +17,9 @@
                     <form action="/habits/<%= habit._id %>?_method=PUT" method="post">
                         <input type="submit" value="I DID IT!">
                     </form>
+                    <form action="/habits/<%= habit._id %>?_method=DELETE" method="post">
+                        <button>Delete</button>
+                    </form>
                 </div>
             <% } %>  
         </div>

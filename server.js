@@ -27,6 +27,11 @@ app.get("/", (req, res) => {
 	res.send("<h1>The Server is Working</h1>")
 })
 
+app.get("/login", (req, res) => {
+	res.send("<h1>You are on the Login Screen</h1>")
+})
+
+
 // LISTENER
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

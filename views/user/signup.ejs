@@ -4,6 +4,13 @@
 <%- include ("../partials/head.ejs")  %> >
 
 <body>
-    
+    <form action="/user/signup" method="post">
+        <fieldset>
+            <legend> Create a User, Track a Habit </legend>
+            <label>Pick a Username <input type="text" name="username" required></label>
+            <label>Pick a Passowrd <input type="text"></label>
+            <label></label>
+        </fieldset>
+    </form>
 </body>
 </html>

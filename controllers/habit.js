@@ -28,7 +28,13 @@ const router = express.Router()
 /** 
  * Routes
  */
-// Index - show my habits
+
+
+/**
+ * ***************** Home Route ************************
+ *      Checks for auth and redirects to index.
+ */
+
 router.get('/', (req, res) => {
     // TODO: this is where we need auth.
     Habit.find().then((habits) => {
@@ -36,12 +42,18 @@ router.get('/', (req, res) => {
     })
 })
 
-// Track a New Habit
+/**
+ * **************** New Route ************************
+ *      Hits the new page to create a new Habit to track.
+ */
 router.get('/new', (req, res) => {
     res.render('/habit/new.ejs')
 })
 
-// Create
+/**
+ * **************** Create Route ************************
+ *      To be used only when the user wants to track a 2nd habit.
+ */
 router.post('/', (req, res) => {
 
     //req.body.username = "" //TODO: need after auth worksi, req.session.username
@@ -49,16 +61,12 @@ router.post('/', (req, res) => {
         console.log(`new habit, ${newHabit.createdDate.toDateString()} created.`)
         res.json(newHabit)
     })
-    /**
-     * name of the habit - comes from the form
-     * username - comes from the user session
-     * date
-     * 0 for count
-     * false for streak
-     */
 })
 
-// Update
+/**
+ * ************** Update Route ***************************
+ *      The critical route of the application, runs every time the user hits the main button.
+ */
 router.put('/:id', (req, res) => {
     // to be used for calculations and updates
     const newLast = new Date(Date.now())
@@ -92,7 +100,18 @@ router.put('/:id', (req, res) => {
     })
 })
 
-// Delete
+/**
+ * ***************** Delete Route ************************
+ *      For removing a habit from a user.
+ */
+router.delete('/:id', async (req, res) => {
+    const deletedHabit = await Habit.findByIdAndDelete(req.params.id)
+
+    if(deletedHabit) {
+        res.redirect('/')
+    }
+})
+
 // Show
 
 /**

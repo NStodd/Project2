@@ -7,6 +7,7 @@ const methodOverride = require("method-override")
 const mongoose = require("mongoose")
 const Habit = require("./models/habit")
 const HabitRouter = require("./controllers/habit")
+const UserRouter = require("./controllers/user")
 
 // EXPRESS APP
 const app = express()
@@ -21,10 +22,12 @@ app.use((req, res, next) => { // trying to make the habit model available in all
 	next()
 })
 app.use('/habits', HabitRouter)
+app.use('/user', UserRouter)
 
 // ROUTES
 app.get("/", (req, res) => {
-	res.send("<h1>The Server is Working</h1>")
+	res.redirect('/habits')
+	//res.send("<h1>The Server is Working</h1>")
 })
 
 app.get("/login", (req, res) => {

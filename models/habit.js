@@ -10,12 +10,20 @@ const {Schema, model} = mongoose
 
 const habitSchema = new Schema({
     name: String, 
-    user: String, 
-    count: Number,
-    streak: Boolean,
-    streakLength: Number,
-    // last: Date // TODO: add the date value last.
-})
+    username: String, 
+    count: {type: Number, default: 0},
+    streak: {type: Boolean, default: false}, 
+    streakLength: {type: Number, default: 0},
+    createdDate: {
+        type: Date,
+        default: Date.now()
+    }, 
+    last: Date // TODO: add the date value last.
+
+}, {
+    timestamp: true
+    }
+)
 
 const Habit = model("Habit", habitSchema)
 

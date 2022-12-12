@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include ('../partials/head.ejs')  %>
+<%- include('../partials/head.ejs')  %>
 
 <body>
-    <%- include ('../partials/header.ejs') %>
+    <%- include('../partials/header.ejs') %>
+
     <main>
         <div class="habits">
             <% for (habit of habits) { %>
                 <div class="habit">
-                    <%= habit.name %>
+                    <h1><%= habit.name %></h1>
+                    
                     <% if (habit.streak) { %>
-                        <h1>Streak!</h1>
+                        Active Streak!
                     <% } else { %>  
-                        <h1>No Streak</h1>
+                        Start a new Streak.
                     <% } %> 
                     <form action="/habits/<%= habit._id %>?_method=PUT" method="post">
                         <input type="submit" value="I DID IT!">
                     </form>
-                    <form action="/habits/<%= habit._id %>?_method=DELETE" method="post">
+                    <form id="delete" action="/habits/<%= habit._id %>?_method=DELETE" method="post">
                         <button>Delete</button>
                     </form>
                 </div>
             <% } %>  
         </div>
-
-    </main>
+        <span><a href="/habits/new"><button> Track a New Habit</button> </a> </span>
+    </main> 
 </body>
 </html>

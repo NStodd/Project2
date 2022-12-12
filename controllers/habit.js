@@ -34,6 +34,16 @@ const router = express.Router()
 router.get('/', (req, res) => {
     // TODO: this is where we need auth.
     Habit.find().then((habits) => {
+        // TODO: logic for checking for broken streaks
+        const now = Date.now()
+        for (habit of habits) {
+            if(now - habit.last > 129600000) {
+                habit.streak = false
+                habit.streakLength = 0
+                //todo: give a message about broken streaks
+                //todo: implement longestStreak logic
+            }
+        }
         res.render("habit/index.ejs", { habits } )
     })
 })
@@ -44,7 +54,7 @@ router.get('/', (req, res) => {
  */
 
 router.get('/new', (req, res) => {
-    res.render('/habit/new.ejs')
+    res.render("habit/new.ejs")
 })
 
 /**
@@ -77,22 +87,23 @@ router.put('/:id', (req, res) => {
         // always increment total Habit count
         updatedHabit.count += 1
     
-        // first see if the full strings are equal (i.e. the user has already performed the habit today)
-        if (newLast === updatedHabit.last) { // !todo!: make sure the comparison is correct, google search.
-            console.log("Great job! You've already done it today, keep it up!") //might be more than the 2nd time.
-        }
-        // this is the streak continuing condition (calculates the difference between the ms values)
-        else if (newLast - updatedHabit.last < 129600000) {
-            console.log("congratulations, you've continued your streak")
-            updatedHabit.streakLength += 1
-        }
-        else { // streak breaks, but that's ok!
-            console.log("way to get back on the horse")
-            updatedHabit.streakLength = 1
+        // this is the streak continued condition
+        if (foundHabit.streak) { //
+            console.log("Keep it up!")
+            // todo: let the user know
         }
 
+        // this is the streak broken condition
+        else {
+            console.log("new streak started")
+            // todo: let the user knowi
+        }
+        
+
         // update the last Date object parameter to be the most recent occurrence
+        updatedHabit.streakLength += 1
         updatedHabit.last = newLast
+        updatedHabit.streak = true
 
         // update the database with the updated Habit object
         Habit.findByIdAndUpdate(req.params.id, updatedHabit, {new: true}, (err, success) => {

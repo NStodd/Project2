@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
                     //todo: implement longestStreak logic
                 }
             }
-            res.render("habit/index.ejs", { habits } )
+            res.render("habit/index.ejs", { habits, loggedIn : true } )
         })        
     }
     else {

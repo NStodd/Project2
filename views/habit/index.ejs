@@ -5,28 +5,34 @@
 <body>
     <%- include('../partials/header.ejs') %>
 
-    <main>
+    <main class="container">
         <div class="habits">
             <% for (habit of habits) { %>
                 <div class="habit">
-                    <h1><%= habit.name %></h1>
-                    
+                    <h2><%= habit.name %></h2>
                     <% if (habit.streak) { %>
-                        Active Streak!
-                    <% } else { %>  
-                        Start a new Streak.
-                    <% } %> 
+                        <p> Active Streak! </p>
+                    <% } else { %>
+                        <p> Start a new Streak. </p>
+                    <% } %>
                     <form action="/habits/<%= habit._id %>?_method=PUT" method="post">
-                        <input type="submit" value="I DID IT!">
+                        <button class="btn waves-effect waves-light" type="submit"> I did it!
+                            <i class="material-icons right">check</i>
+                          </button>
+                        <!-- <input class="btn waves-effect waves-light" type="submit" value="I DID IT!"> -->
                     </form>
                     <form class="delete" action="/habits/<%= habit._id %>?_method=DELETE" method="post">
-                        <input id="delete" type="image" name="delete" src="https://static.vecteezy.com/system/resources/previews/000/649/201/original/trash-icon-symbol-sign-vector.jpg">
+                        <button class="btn-flat waves-effect waves-light" type="submit">
+                            <i class="material-icons right">delete_forever</i>
+                          </button>
+                        <!-- <input id="delete" type="image" name="delete" src="https://static.vecteezy.com/system/resources/previews/000/649/201/original/trash-icon-symbol-sign-vector.jpg"> -->
                     </form>
                 </div>
             <% } %>  
         </div>
-        <div class="new"><a href="/habits/new"><button> Track a New Habit</button> </a></div>
-        <div class="logout"><a href="/user/logout"><button>Logout</button></a></div>
+        <!-- <div class="new"> -->
+        <a class="btn-floating btn-large waves-effect waves-light deep-purple-lighten-3" href="/habits/new"><i class="material-symbols-outlined">add</i></a>
+        <!-- </div> --></br>
     </main> 
-</body>
+    <%- include('../partials/footer.ejs') %>
 </html>

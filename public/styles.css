@@ -1,9 +1,9 @@
 body {
-    text-align: center;
+    
 }
 
 fieldset {
-    background-color: aqua;
+    background-color:  #e3f2fd;
     text-align: center;
 }
 
@@ -20,11 +20,13 @@ fieldset {
 }
 
 .habit {
+    text-align: center;
     margin: 25px;
     width: 300px;
     height: auto;
     border: 5px solid black;
     background-color: antiquewhite;
+    font-family: 'Roboto Slab', serif;
 }
 .new {
     padding: 30px;
@@ -32,7 +34,10 @@ fieldset {
 
 .logout {
     padding-top: 50px;
-    text-align: right;
+    align-items: right !important; 
+}
+.navlogout{
+    font-family:'Play', sans-serif !important;
 }
 .delete {
     padding-top: 20px;

@@ -3,8 +3,8 @@
 
 <%- include ("../partials/head.ejs")  %>
 
-<body>
-    <h1>Please Login To See Your Habit Tracker</h1>
+<body class="container">
+    <h3 class="center-align">Please Login To See Your Habit Tracker</h3>
     <form action="/user/login" method="post"><fieldset>
         <label>
             Username: <input type="text" name="username" required>
@@ -12,9 +12,9 @@
         <label>
             Password: <input type="password" name="password" required>
         </label>
-        <input type="submit" value="Log In">
+        <input type="submit" class="waves-effect waves-light btn-small" value="Log In">
     </fieldset></form>
     <p><%= message  %> </p>
-    <a href="/user/signup" class="NewUser"><button>Create A User, Track A Habit</button></a>
+    <a href="/user/signup" class="card-panel cyan lighten-2 waves-effect waves-light btn-small">Create A New User</a>
 </body>
 </html>

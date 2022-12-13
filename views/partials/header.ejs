@@ -1,5 +1,13 @@
 <!-- Put in a thing where a user can add a new habit or delete a habit -->
-<header>
-    <h1> Your Habit Tracker! </h1>
-
-</header>
+<nav>
+    <div class="nav-wrapper deep-purple darken-4">
+        <a href="/habits" class="brand-logo"> Habit Tracker!</a>
+        <ul id="nav-mobile" class="right">
+            <% if (loggedIn) {%> 
+                <li><a class="navlogout" href="/user/logout">Logout</a></li>
+            <% } else { %> 
+                <li><a href="/user/login">Login</a></li>
+            <% } %> 
+        </ul>
+    </div>
+</nav>

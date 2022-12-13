@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs')  %>
+<body>
+    <%- include('../partials/header.ejs')  %>
+    <div class="container center-align">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4><%= habit.name %></h4></li>
+            <li class="collection-item">User: <%= habit.username %></li>
+            <li class="collection-item">Count: <%= habit.count %></li>
+            <li class="collection-item">Active Streak: <%= habit.streak %></li>
+            <li class="collection-item">Created on: <%= habit.createdDate.toDateString() %></li>
+          </ul>
+    </div>
+</body>

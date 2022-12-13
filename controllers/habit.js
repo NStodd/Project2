@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
  */
 
 router.get('/new', (req, res) => {
-    res.render("habit/new.ejs", {loggedIn:true})
+    res.render("/habit/new.ejs", {loggedIn:true})
 })
 
 /**
@@ -120,6 +120,17 @@ router.put('/:id', (req, res) => {
         })
     })
 })
+
+router.get('/:id', (req, res) => {
+    console.log(req.params.id)
+    Habit.findById(req.params.id)
+    .then(
+        (habit) => {
+            res.render('habit/show.ejs', {habit, loggedIn: true})
+        }
+    )
+})
+
 
 /**
  * ***************** Delete Route ************************

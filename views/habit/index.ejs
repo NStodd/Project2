@@ -15,9 +15,9 @@
                           </button>
                         <!-- <input id="delete" type="image" name="delete" src="https://static.vecteezy.com/system/resources/previews/000/649/201/original/trash-icon-symbol-sign-vector.jpg"> -->
                     </form>
-                    <h3 class="habit_name"><%= habit.name %></h3>
+                    <a class="waves-effect waves-teal btn-flat habit_name" href="/habits/<%= habit._id %>"> <%= habit.name %></a>
                     <% if (habit.streak) { %>
-                        <p> Active Streak! </p>
+                        <p class="streak_text"> Active Streak! </p>
                     <% } else { %>
                         <p> Start a new Streak. </p>
                     <% } %>

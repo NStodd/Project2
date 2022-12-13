@@ -29,7 +29,10 @@ fieldset {
     font-family: 'Roboto Slab', serif;
 }
 .habit_name{
-    margin:0px;
+    font-size: larger;
+}
+.streak_text{
+    font-size:smaller;
 }
 .update {
     margin-bottom: 10px;

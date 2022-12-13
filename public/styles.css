@@ -28,10 +28,19 @@ fieldset {
     background-color: antiquewhite;
     font-family: 'Roboto Slab', serif;
 }
+.habit_name{
+    margin:0px;
+}
+.update {
+    margin-bottom: 10px;
+}
+
 .new {
     padding: 30px;
 }
-
+.new_user {
+    font-family: "Roboto Slab", serif;
+}
 .logout {
     padding-top: 50px;
     align-items: right !important; 
@@ -40,8 +49,6 @@ fieldset {
     font-family:'Play', sans-serif !important;
 }
 .delete {
-    padding-top: 20px;
-    padding-right: 5px;
     text-align: right;
 }
 #delete {

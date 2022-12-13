@@ -4,6 +4,7 @@
 const { application } = require("express")
 const express = require("express")
 const Habit = require("../models/habit")
+const User = require("../models/user")
 //const Habits = require("../models/habit")
 const UserRouter = require('./user')
 
@@ -31,21 +32,27 @@ router.use((req, res, next) => {
  * ***************** Home Route ************************
  *      Checks for auth and redirects to index.       */
 router.get('/', (req, res) => {
+    console.log("ok, made it to the index route in habit.js")
     // TODO: this is where we need auth.
-
-    Habit.find({ username : req.session.username}).then((habits) => {
-        // TODO: logic for checking for broken streaks
-        const now = Date.now()
-        for (habit of habits) {
-            if(now - habit.last > 129600000) {
-                habit.streak = false
-                habit.streakLength = 0
-                //todo: give a message about broken streaks
-                //todo: implement longestStreak logic
+    if (req.session.loggedIn) {
+        console.log("and now we are in the req.session condition here too")
+        Habit.find({ username : req.session.username}).then((habits) => {
+            // TODO: logic for checking for broken streaks
+            const now = Date.now()
+            for (habit of habits) {
+                if(now - habit.last > 129600000) {
+                    habit.streak = false
+                    habit.streakLength = 0
+                    //todo: give a message about broken streaks
+                    //todo: implement longestStreak logic
+                }
             }
-        }
-        res.render("habit/index.ejs", { habits } )
-    })
+            res.render("habit/index.ejs", { habits } )
+        })        
+    }
+    else {
+        res.redirect('/user/login', {message: "Not logged in, please log in."})
+    }
 })
 
 /**

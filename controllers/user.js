@@ -32,8 +32,12 @@ router.post("/signup", async (req, res) => {
         if (err) {
             res.render('/signup', {message: "User Already Exists"})
         }
-        Habit.create({name: user.habit, username: user.username}, (err, habit) => {
-
+        console.log(`new user, ${user.username} created.`)
+        console.log(user)
+        req.body.name = user.habit
+        Habit.create(req.body, (err, habit) => {
+            console.log(habit)
+            console.log(`new habit ${habit.name} created.`)
         })
         res.redirect("/user/login")
     })
@@ -43,11 +47,17 @@ router.post("/signup", async (req, res) => {
 
 // The login Routes (Get => form,  post => submit form)
 router.get("/login", (req, res) => {
-    res.render("user/login.ejs", {message: ""})
+    if (req.session.loggedIn) {
+        res.redirect("/habits/")
+    }
+    else {
+        res.render("user/login.ejs", {message: ""})
+    }
 })
 
 router.post("/login", (req, res) => {
-    const { username, password } = req.body
+    
+    const { username, password, habit } = req.body
     // can also say req.body.username
     // same w/ passeword
 
@@ -71,7 +81,7 @@ router.post("/login", (req, res) => {
 router.get('/logout', (req, res) => {
     // destroy the session and redirect to main page
     req.session.destroy((err) => {
-        res.redirect('/users/login')
+        res.redirect('/user/login')
     })
 })
 

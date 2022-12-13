@@ -38,7 +38,15 @@ app.use('/user', UserRouter)
 
 // ROUTES
 app.get("/", (req, res) => {
-	res.redirect('/habits')
+	console.log("ok, here we are in server.js")
+	if (req.session) {
+		console.log("ok, here we are in the req.session condition")
+		res.redirect('/user/login')
+	}
+	else {
+		console.log("ok, here we are being redirected to /user/login")
+		res.redirect('/user/login')
+	}
 	//res.send("<h1>The Server is Working</h1>")
 })
 

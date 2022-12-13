@@ -22,27 +22,38 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
     // encrypt password
     req.body.password = await bcrypt.hash(req.body.password, await bcrypt.genSalt(10))
+    const testuser = req.body.username
 
-    // need to confirm that the user doesn't exist
-
+    User.findOne(testuser, (err, user) => {
+        if(user){
+            // toast popup, error message or popup
+            res.render("user/signup.ejs", {message: "User Already Exists"})
+        }
+    })
 
     //create the new user
     User.create(req.body, (err, user) => {
         console.log(req.body)
+        console.log("we are in the user create portion")
         if (err) {
-            res.render('/signup', {message: "User Already Exists"})
+            console.log(err)
+            res.render("user/login.ejs", {message: "User Already exists."})
+            // res.render('user/signup.ejs', {message: "User Already Exists"})
         }
-        console.log(`new user, ${user.username} created.`)
-        console.log(user)
-        req.body.name = user.habit
-        Habit.create(req.body, (err, habit) => {
-            console.log(habit)
-            console.log(`new habit ${habit.name} created.`)
-        })
-        res.redirect("/user/login")
-    })
-    // create the habit for the user
+        else {
+            console.log("and here we are on the other side of it")
+            console.log(`new user, ${user.username} created.`)
+            console.log(user)
+            req.body.name = user.habit
 
+            // create the habit for the user
+            Habit.create(req.body, (err, habit) => {
+                console.log(habit)
+                console.log(`new habit ${habit.name} created.`)
+            })
+            res.redirect("/user/login")
+        }
+    })
 })
 
 // The login Routes (Get => form,  post => submit form)

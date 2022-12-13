@@ -19,13 +19,14 @@
                     <form action="/habits/<%= habit._id %>?_method=PUT" method="post">
                         <input type="submit" value="I DID IT!">
                     </form>
-                    <form id="delete" action="/habits/<%= habit._id %>?_method=DELETE" method="post">
-                        <button>Delete</button>
+                    <form class="delete" action="/habits/<%= habit._id %>?_method=DELETE" method="post">
+                        <input id="delete" type="image" name="delete" src="https://static.vecteezy.com/system/resources/previews/000/649/201/original/trash-icon-symbol-sign-vector.jpg">
                     </form>
                 </div>
             <% } %>  
         </div>
-        <span><a href="/habits/new"><button> Track a New Habit</button> </a> </span>
+        <div class="new"><a href="/habits/new"><button> Track a New Habit</button> </a></div>
+        <div class="logout"><a href="/user/logout"><button>Logout</button></a></div>
     </main> 
 </body>
 </html>

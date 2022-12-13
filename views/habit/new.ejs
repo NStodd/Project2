@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include('../partials/head.ejs')  %>
-<body>
+<body style="text-align: center">
     <%- include('../partials/header.ejs')  %>
-    <h1>You are on the New Page</h1>
+    <h1>Track a New Habit</h1>
+
+    <div>
+        <form action="/habits" method="post">
+            What daily habit do you want to track?
+            <input type="text" name="name" placeholder="My New Habit"> </br>
+            <input type="submit" value="Track a New Habit">
+        </form>
+    </div>
+
 </body>
 </html>

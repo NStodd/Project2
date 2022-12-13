@@ -8,6 +8,8 @@ const mongoose = require("mongoose")
 const Habit = require("./models/habit")
 const HabitRouter = require("./controllers/habit")
 const UserRouter = require("./controllers/user")
+const MongoStore = require("connect-mongo")
+const session = require('express-session')
 
 // EXPRESS APP
 const app = express()
@@ -21,6 +23,16 @@ app.use((req, res, next) => { // trying to make the habit model available in all
 	req.models = { Habit }
 	next()
 })
+
+app.use(
+	session({
+		secret: process.env.SECRET,
+		store: MongoStore.create({mongoUrl: process.env.MONGO}),
+		saveUninitialized: true,
+		resave:false,
+	})
+)
+
 app.use('/habits', HabitRouter)
 app.use('/user', UserRouter)
 
@@ -31,7 +43,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/login", (req, res) => {
-	res.send("<h1>You are on the Login Screen</h1>")
+	res.redirect("/user/login")
 })
 
 

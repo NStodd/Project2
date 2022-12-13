@@ -13,10 +13,11 @@ const UserRouter = require('./user')
 const router = express.Router()
 
 /**
- * Middleware - TODO: needed for auth
+ *  Auth Middleware
  */
 
-/* router.use((req, res, next) => {
+
+router.use((req, res, next) => {
     try {if (req.session.loggedIn) {
         next()
     }}
@@ -24,16 +25,15 @@ const router = express.Router()
         console.log("you are not logged in.")
         res.redirect('user/login')
     }
-})*/
-
-
+})
 
 /**  ROUTES
  * ***************** Home Route ************************
  *      Checks for auth and redirects to index.       */
 router.get('/', (req, res) => {
     // TODO: this is where we need auth.
-    Habit.find().then((habits) => {
+
+    Habit.find({ username : req.session.username}).then((habits) => {
         // TODO: logic for checking for broken streaks
         const now = Date.now()
         for (habit of habits) {
@@ -64,10 +64,11 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res) => {
 
-    //req.body.username = "" //TODO: need after auth worksi, req.session.username
+    req.body.username = req.session.username
+
     Habit.create(req.body, (err, newHabit) => {
         console.log(`new habit, ${newHabit.createdDate.toDateString()} created.`)
-        res.json(newHabit)
+        res.redirect('/')
     })
 })
 

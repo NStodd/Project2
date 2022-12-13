@@ -10,9 +10,9 @@ const mongoose = require("./connection")
 const {Schema, model} = mongoose
 
 const userSchema = new Schema({
-    user: {type: String, required: true, unique: true}, 
+    username: {type: String, required: true, unique: true}, 
     password: {type: String, required: true},
-    habit: String,
+    // habit: {type: String, required: true}
     // createdDate: Date // TODO: date stuff comes later
 })
 

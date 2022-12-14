@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
  */
 
 router.get('/new', (req, res) => {
-    res.render("/habit/new.ejs", {loggedIn:true})
+    res.render("habit/new.ejs", {loggedIn:true})
 })
 
 /**

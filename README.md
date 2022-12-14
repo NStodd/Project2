@@ -20,7 +20,7 @@ Add new habits or remove old ones as you want to change around your daily routin
 ### Technologies Used
 - HTML, CSS & Javascript
 - Miro, Trello, Markdown
-- MongoDB
+- MongoDB, Mongoose
 - Express
 - bcrypt
 - [Materialize](https://materializecss.com/)
